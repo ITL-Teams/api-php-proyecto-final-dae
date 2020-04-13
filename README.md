@@ -10,6 +10,32 @@ Integrado por:
 * Christian André Hernández García
 * Javier Alejandro Ortiz Gaona
 
+### Como instalar
+**Nota:** *Aun estamos en fase de desarrollo, estas instrucciones son para los miembros de nuestro equipo. 
+Una vez finalice el proyecto podrá encontrar las instrucciones de instalación para producción.*
+
+* Clonar este repositorio
+* Crear la BD en MySQL/MariaDB usando el script ``script-bd.sql``
+* Crear el archivo ``.env`` dentro del proyecto  ``laravel-passport``
+* Copiar la configuración de ``laravel-passport/.env.example`` a ``laravel-passport/.env`` *(Realizar los cambios pertinentes en la configuración de conexión a la base de datos por los de su SGBD, si esta usando XAMMP no requiere ningun cambio)*
+* Ejecutar los comandos para completar el entorno de trabajo
+```sh
+# Entrar al proyecto de laravel
+cd laravel-passport
+
+# Instalar Paquetes
+composer install
+
+# Generar Llave
+php artisan key:generate
+
+# Correr Migraciones (solo la primera vez que se clona, tenga en cuenta que si se ejecuta por segunda vez se borraran todos los datos)
+php artisan migrate
+
+# Ejecutar el servidor de desarrollo
+php artisan serve
+```
+
 ### ¿Por qué hacemos este proyecto?
 Principalmente porque debemos desarrollar un proyecto para solucionar una problematica relacionada a la crisis por el COVID-19
 
