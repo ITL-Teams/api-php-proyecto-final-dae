@@ -4,9 +4,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
+            <!--<div class="card"> -->
+                <div class="card-header" style="display: none">{{ __('Register') }}</div>
+                <div style="align-content: center; text-align: center;">REGISTRAR</div> 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
@@ -70,7 +70,7 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            <!--</div> -->
         </div>
     </div>
 </div>
