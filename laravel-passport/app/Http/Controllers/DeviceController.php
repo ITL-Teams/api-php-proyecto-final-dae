@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 class DeviceController extends Controller
 {
-    public function()
+    public function index()
     {
-        return view('device-config');
+        return view('panel.device-config');
     }
 }
