@@ -22,7 +22,6 @@
 				</thead>
 
 				<tbody>
-					<?php for($i = 0; $i < 15; $i++){ ?>
 					<tr>
 						<td></td>
 						<td></td>
@@ -32,7 +31,6 @@
 							<span class="btn btn-danger btn-sm" id="delete">Eliminar</span>
 						</td>
 					</tr>
-					<?php } ?>
 				</tbody>
 			</table>
 		</div>
