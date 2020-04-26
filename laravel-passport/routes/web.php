@@ -24,3 +24,5 @@ Route::get('/client', 'ClientController@index')->middleware('auth');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/device', 'DeviceController@index');
+
+Route::get('/account', 'AccountController@index');

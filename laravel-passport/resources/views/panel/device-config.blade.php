@@ -9,7 +9,7 @@
 			</div>
 		</div>
 
-		<div class="table-responsive">
+		<div class="table-responsive scrollbar">
 		<div class="scroll">
 			<table class="table table-hover table-bordered table-sm">
 				<thead class="thead-dark">
