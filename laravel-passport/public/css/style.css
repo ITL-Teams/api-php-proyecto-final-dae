@@ -12,3 +12,21 @@
 .m-b-md  {
 	margin-bottom: 30px;
 }
+
+/*device-config Andres Rodriguez*/
+
+.title2  {
+	text-align: center;
+	font-size: 2em;
+}
+
+.table-responsive {
+	border: 1px solid Black;
+}
+
+.scroll {
+	text-align: center;
+	margin: auto;
+	width: 1090px;
+	height: 300px;
+}

@@ -2,32 +2,40 @@
 
 @section("content")
 
-	<h1>Lista de Dispositivos</h1>
-
 	<div class="container">
+		<div class="content">
+			<div class="title2 m-b-md">
+				Lista de Dispositivos
+			</div>
+		</div>
 
-		<table class="table table-hover table-condensed table-bordered">
-			<tr>
-				<td>Direcci&oacute;n IP</td>
-				<td>Nombre Dispositivo</td>
-				<td>Seleccionar</td>
-				<td>Acciones</td>
-			</tr>
+		<div class="table-responsive">
+		<div class="scroll">
+			<table class="table table-hover table-bordered table-sm">
+				<thead class="thead-dark">
+					<tr>
+						<th>Direcci&oacute;n IP</th>
+						<th>Nombre Dispositivo</th>
+						<th>Seleccionar</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
 
-
-				<tr>
-					<td></td>
-					<td></td>
-					<td><span class="btn btn-primary btn-sm" id="select">Select</span></td>
-					<td>
-						<span class="btn btn-warning btn-sm" id="edit">Edit</span>
-						<span class="btn btn-danger btn-sm" id="delete">Delete</span>
-					</td>
-				</tr>	
-
-			
-
-		</table>
-
+				<tbody>
+					<?php for($i = 0; $i < 15; $i++){ ?>
+					<tr>
+						<td></td>
+						<td></td>
+						<td><span class="btn btn-secondary btn-sm" id="select">Seleccionar</span></td>
+						<td>
+							<span class="btn btn-warning btn-sm" id="edit">Editar</span>
+							<span class="btn btn-danger btn-sm" id="delete">Eliminar</span>
+						</td>
+					</tr>
+					<?php } ?>
+				</tbody>
+			</table>
+		</div>
+		</div>
 	</div>
 @endsection
