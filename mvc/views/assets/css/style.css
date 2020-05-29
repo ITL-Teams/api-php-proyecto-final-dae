@@ -1,0 +1,48 @@
+.content  {
+	font-family: 'Nunito', sans-serif;
+	margin-top: 20px;
+	text-align: center;
+}
+
+.title1  {
+	text-align: center;
+	font-size: 3em;
+}
+
+.m-b-md  {
+	margin-bottom: 30px;
+}
+
+/*device-config Andres Rodriguez*/
+
+.title2  {
+	text-align: center;
+	font-size: 2em;
+}
+
+.scroll {
+	text-align: center;
+	margin: auto;
+	width: 1090px;
+	height: 300px;
+}
+
+/*Cambio de estilo del scrollbar. Proporsionado por Angel Ricardo Ramirez*/
+
+.scrollbar::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #DCDCDC;
+}
+
+.scrollbar::-webkit-scrollbar
+{
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+.scrollbar::-webkit-scrollbar-thumb
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #707070;
+}
