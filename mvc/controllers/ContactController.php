@@ -1,9 +1,16 @@
 <?php
 
-require_once 'models/Contact.php';
+require_once 'models/db/dao/ContactDAO.php';
 
 class ContactController
 {
+	private $contactDao;
+
+	public function __construct()
+	{
+		$this->contactDao = new ContactDAO;
+	}
+
 	public function show()
 	{
 		require_once 'views/contact/contact.php';
@@ -19,7 +26,7 @@ class ContactController
 		}
 
 		$comment = new Contact($email, $comment);
-		$comment->create();
+		$this->contactDao->create($comment);
 		
 		require_once 'views/contact/comment-sent.php';
 	}
