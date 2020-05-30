@@ -30,6 +30,10 @@ switch ($url)
         );
     break;
 
+    case '/user/create-service':
+        
+    break;
+
     default:
         error(404, "Not Found");
 }

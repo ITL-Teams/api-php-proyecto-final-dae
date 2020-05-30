@@ -51,7 +51,7 @@
 					<a class="nav-link" href="#">Registrarse</a>
 				</li>
 				<li class="nav-item <?= active('contact'); ?>">
-					<a class="nav-link" href="contact">Contacto</a>
+					<a class="nav-link" href="<?= "$path/contact"; ?>">Contacto</a>
 				</li>
 			<ul>
 		<?php } ?>

@@ -4,9 +4,26 @@ CREATE DATABASE netws;
 USE netws;
 
 CREATE TABLE contact ( 
-	id         INT NOT NULL AUTO_INCREMENT,
-	email      VARCHAR(255) NOT NULL,
-	comment    TEXT NOT NULL,
+    id         INT NOT NULL AUTO_INCREMENT,
+    email      VARCHAR(255) NOT NULL,
+    comment    TEXT NOT NULL,
 
     PRIMARY KEY (id)
+);
+
+CREATE TABLE services ( 
+    id           INT NOT NULL AUTO_INCREMENT,
+    type         VARCHAR(10) NOT NULL,
+    privacy      VARCHAR(10) NOT NULL,
+    service_name VARCHAR(255) NOT NULL,
+    description  TEXT NOT NULL,
+    code         TEXT NOT NULL,
+    reference    VARCHAR(40),
+
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE auth_list ( 
+    reference    VARCHAR(40) NOT NULL,
+    token        VARCHAR(20) NOT NULL
 );
