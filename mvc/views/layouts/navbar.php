@@ -1,5 +1,12 @@
+<?php
+	function active($reference) {
+		if( $reference == $GLOBALS['page_name'] )
+			return 'active';
+	}
+?>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	<a class="navbar-brand" href="{{ url('/') }}">
+	<a class="navbar-brand" href="./">
 		<img src="views/assets/img/brand-logo-head.png" alt="brand-logo" height="40px">
 	</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,14 +16,14 @@
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<?php if(isset($username)) { ?>
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item">
+				<li class="nav-item <?= active('home'); ?>">
 					<a class="nav-link" href="#">Inicio</a>
 				</li>
-				<li class="nav-item">
+				<li class="nav-item <?= active('support'); ?>">
 					<a class="nav-link" href="#">Soporte</a>
 				</li>
 
-				<li class="nav-item dropdown">
+				<li class="nav-item dropdown <?= active('service'); ?>">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						Servicio
 					</a>
@@ -37,11 +44,14 @@
 
 		<?php } else { ?>
 			<ul class="navbar-nav">
-				<li class="nav-item">
+				<li class="nav-item <?= active('sign in'); ?>">
 					<a class="nav-link" href="#">Iniciar Sesión</a>
 				</li>
-				<li class="nav-item">
+				<li class="nav-item <?= active('register'); ?>">
 					<a class="nav-link" href="#">Registrarse</a>
+				</li>
+				<li class="nav-item <?= active('contact'); ?>">
+					<a class="nav-link" href="contact">Contacto</a>
 				</li>
 			<ul>
 		<?php } ?>

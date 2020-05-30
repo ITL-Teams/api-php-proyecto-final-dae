@@ -1,8 +1,6 @@
 <?php
 
-namespace Controller;
-
-class MainPage
+class MainPageController
 {
 	public function show()
 	{
