@@ -5,7 +5,8 @@ require_once 'models/Contact.php';
 
 class ContactDAO implements DataAccessObject
 {
-    public function create($contact) {
+    public function create($contact)
+    {
         $connection = DataBase::getConnection();
         $statement = $connection->prepare("INSERT INTO contact(email,comment) VALUES (:email,:comment)");
         $statement->execute([
@@ -14,7 +15,8 @@ class ContactDAO implements DataAccessObject
         ]);
     }
 
-    public function all() {
+    public function all()
+    {
         $connection = DataBase::getConnection();
         $statement = $connection->prepare("SELECT * FROM contact");
         $statement->execute();
@@ -31,7 +33,8 @@ class ContactDAO implements DataAccessObject
         return $contacts;
     }
 
-    public function find($id) {
+    public function find($id)
+    {
         $connection = DataBase::getConnection();
         $statement = $connection->prepare("SELECT * FROM contact WHERE id=:id");
         $statement->execute(["id" => $id]);
