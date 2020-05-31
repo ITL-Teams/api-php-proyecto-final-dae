@@ -2,9 +2,10 @@
 
 // Controller dependencies
 require_once 'controllers/MainPageController.php';
+require_once 'controllers/HomeController.php';
 require_once 'controllers/ContactController.php';
 require_once 'controllers/CreateServiceController.php';
-require_once 'controllers/HomeController.php';
+require_once 'controllers/TestServiceController.php';
 
 // Route dispatcher
 if(isset($_SERVER['PATH_INFO']))
@@ -51,6 +52,11 @@ switch ($url)
             form('description'),
             form('code')
         );
+    break;
+
+    case '/user/services/test':
+        $controller = new TestServiceController;
+        $controller->show();
     break;
 
     default:
