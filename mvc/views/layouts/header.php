@@ -1,7 +1,4 @@
-<?php 
-	$path = "/dae/mvc"; 
-	$assets = "$path/views/assets"; 
-?>
+<?php require_once 'path.php'; ?>
 
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
