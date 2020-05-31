@@ -1,8 +1,11 @@
 <?php
 
 require_once 'service.php';
+require_once 'services/exceptions/not_a_json.php';
+require_once 'services/exceptions/not_input_found.php';
+require_once 'services/exceptions/unexecutable_service.php';
 
-abstract class AbstractService implements Service
+abstract class AbstractService implements Services\Service
 {
     private $id;
     private $service_name;
@@ -36,5 +39,23 @@ abstract class AbstractService implements Service
 
     protected function getCode() { 
         return $this->code;
+    }
+
+    protected function isJson($string) {
+        json_decode($string);
+        return (json_last_error() == JSON_ERROR_NONE);
+    }
+
+    protected function decode($string)
+    {
+        if(!$this->isJson($string))
+            throw new NotJsonException();
+
+        return json_decode($string, true);
+    }
+
+    protected function encode($string)
+    {
+        return json_encode($string);
     }
 }

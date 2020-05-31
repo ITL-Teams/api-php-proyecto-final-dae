@@ -2,7 +2,7 @@
 
 require_once 'service.php';
 
-abstract class ServiceDecorator implements Service
+abstract class ServiceDecorator implements Services\Service
 {
     private $service;
 

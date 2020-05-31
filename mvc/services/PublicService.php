@@ -9,8 +9,7 @@ class PublicService extends ServiceDecorator
         parent::__construct($service);
     }
 
-    public function executeService() {
-        echo "Este es un servicio publico";
-        $this->getService()->executeService();
+    public function executeService($input) {
+        $this->getService()->executeService($input);
     }
 }

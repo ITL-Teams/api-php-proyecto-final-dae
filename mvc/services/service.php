@@ -1,6 +1,8 @@
 <?php
 
+namespace Services;
+
 interface Service
 {
-	public function executeService();
+	public function executeService($input);
 }
