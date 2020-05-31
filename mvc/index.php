@@ -3,6 +3,7 @@
 // Controller dependencies
 require_once 'controllers/MainPageController.php';
 require_once 'controllers/ContactController.php';
+require_once 'controllers/CreateServiceController.php';
 
 // Route dispatcher
 if(isset($_SERVER['PATH_INFO']))
@@ -30,8 +31,20 @@ switch ($url)
         );
     break;
 
-    case '/user/create-service':
-        
+    case '/user/services/create/register':
+        $controller = new CreateServiceController;
+        $controller->createService(
+            //form('service_type'),
+            //form('service_privacy'),
+            //form('service_name'),
+            //form('service_description'),
+            //form('service_code'),
+            'regex',
+            'public',
+            'primer regex',
+            'numeros binarios',
+            '^(10)+$'
+        );
     break;
 
     default:
