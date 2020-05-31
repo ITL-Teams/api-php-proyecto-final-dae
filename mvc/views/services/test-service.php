@@ -23,15 +23,34 @@
 							<label class="badge badge-dark paragraph">
 								Code
 							</label>
+						</div>
+						<div class="col-md-10">
+							<textarea class="form-control" rows="5" name="code" readonly="true">
+							</textarea>
+						</div>
+					</div>
+					<br>
+					<div class="form-row">
+						<div class="col-md-2">
 							<label class="badge badge-dark paragraph">
-								Config
-							</label>
-							<label class="badge badge-dark paragraph">
-								Monitor
+								Output
 							</label>
 						</div>
 						<div class="col-md-10">
-							<textarea class="form-control" rows="20" name="code"></textarea>
+							<textarea class="form-control" rows="8" name="output" readonly="true">
+							</textarea>
+						</div>
+					</div>
+					<hr>
+					<div class="form-row">
+						<div class="col-md-2">
+							<label class="badge badge-dark paragraph">
+								Input
+							</label>
+						</div>
+						<div class="col-md-10">
+							<textarea class="form-control" rows="3" name="code">
+							</textarea>
 						</div>
 					</div>
 				</div>
