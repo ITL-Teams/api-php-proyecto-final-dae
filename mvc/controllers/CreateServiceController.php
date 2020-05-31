@@ -11,6 +11,11 @@ class CreateServiceController
         $this->serviceDao = new ServiceDAO;
     }
 
+    public function show()
+    {
+        require_once 'views/services/create-service.php';
+    }
+
     public function createService(
         $service_type,
         $service_privacy,

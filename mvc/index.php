@@ -4,6 +4,7 @@
 require_once 'controllers/MainPageController.php';
 require_once 'controllers/ContactController.php';
 require_once 'controllers/CreateServiceController.php';
+require_once 'controllers/HomeController.php';
 
 // Route dispatcher
 if(isset($_SERVER['PATH_INFO']))
@@ -15,6 +16,11 @@ switch ($url)
 {
     case '/':
         $controller = new MainPageController;
+        $controller->show();
+    break;
+
+    case '/user/home':
+        $controller = new HomeController;
         $controller->show();
     break;
 
@@ -31,19 +37,19 @@ switch ($url)
         );
     break;
 
+    case '/user/services/create':
+        $controller = new CreateServiceController;
+        $controller->show();
+    break;
+
     case '/user/services/create/register':
         $controller = new CreateServiceController;
         $controller->createService(
-            //form('service_type'),
-            //form('service_privacy'),
-            //form('service_name'),
-            //form('service_description'),
-            //form('service_code'),
-            'regex',
-            'public',
-            'primer regex',
-            'numeros binarios',
-            '^(10)+$'
+            form('type'),
+            form('privacy'),
+            form('name'),
+            form('description'),
+            form('code')
         );
     break;
 

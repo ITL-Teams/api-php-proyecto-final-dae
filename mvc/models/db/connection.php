@@ -6,7 +6,7 @@ class DataBase
 
 	private function __construct() {}
 
-	private function newConnection() {
+	private static function newConnection() {
 		$DB_HOST     = 'localhost';
 		$DB_NAME     = 'netws';
 		$DB_USER     = 'root';
