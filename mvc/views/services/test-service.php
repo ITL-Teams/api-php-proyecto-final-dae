@@ -49,7 +49,7 @@
 							</label>
 						</div>
 						<div class="col-md-10">
-							<textarea class="form-control" rows="3" name="code">
+							<textarea class="form-control" rows="3" name="input">
 							</textarea>
 						</div>
 					</div>
