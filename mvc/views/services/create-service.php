@@ -19,7 +19,7 @@
 			<form action="./create/register" method="POST" class="form-row">
 			<div class="col-md-6">
 					<label class="badge badge-pill badge-dark paragraph">Code</label>
-					<textarea rows="20" class="form-control" name="code"></textarea>
+					<textarea rows="20" class="form-control" name="code" required></textarea>
 				</div>
 				<div class="col-md-6">
 					<div class="form-row">
@@ -29,7 +29,7 @@
 							</label>
 							<select class="form-control" name="type">
 								<option value="none">--Select an option--</option>
-								<option value="regex">REGEX</option>
+								<option value="regex">Regex</option>
 							</select>
 							<br>
 						</div>
@@ -51,7 +51,8 @@
 							<label class="badge badge-pill badge-dark paragraph">
 								Service Name
 							</label>
-							<input type="text" name="name" class="form-control">
+							<input type="text" name="name" class="form-control"
+								required pattern="[A-Za-z]+[A-Za-z0-9]*">
 						</div>	
 						<div class="col-sm-1"></div>
 						
