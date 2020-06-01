@@ -31,8 +31,22 @@ class CreateServiceController
            empty($service_code)
         )
         {
-            error(400, 'Bad Request');
-            return;
+            $this->badRequest('All fields must be completed');
+        }
+
+        if(!preg_match('/^[A-Za-z]+[A-Za-z0-9]*$/', $service_name))
+        {
+            $this->badRequest('Service name can only contain letters and numbers');
+        }
+
+        if(!$this->validServicePrivacy($service_privacy))
+        {
+            $this->badRequest('Not valid privacy');   
+        }
+
+        if(!$this->validService($service_type))
+        {
+            $this->badRequest('That service doesn\'t exist');   
         }
 
         $service = new Service(
@@ -44,7 +58,33 @@ class CreateServiceController
         );
 
         $this->serviceDao->create($service);
+    }
 
-        require_once 'views/contact/comment-sent.php';
+    private function badRequest($description)
+    {
+        $redirect_message = "<strong>Try Again. </strong>You'll be redirected in 5 seconds";
+        error(400, 'Bad Request',"$description<br>$redirect_message");
+        header('refresh:5; url=../create');
+        exit;
+    }
+
+    private function validServicePrivacy($service_privacy)
+    {
+        $privacy = [
+            "public",
+            "private",
+            "shared"
+        ];
+
+        return in_array($service_privacy, $privacy);
+    }
+
+    private function validService($service_type)
+    {
+        $services = [
+            "regex"
+        ];
+
+        return in_array($service_type, $services);
     }
 }
