@@ -45,10 +45,10 @@
 		<?php } else { ?>
 			<ul class="navbar-nav">
 				<li class="nav-item <?= active('sign in'); ?>">
-					<a class="nav-link" href="#">Iniciar Sesión</a>
+					<a class="nav-link"  href="<?= "$path/login";?>">Iniciar Sesión</a>
 				</li>
 				<li class="nav-item <?= active('register'); ?>">
-					<a class="nav-link" href="#">Registrarse</a>
+					<a class="nav-link"  href="<?= "$path/create-account";?>">Registrarse</a>
 				</li>
 				<li class="nav-item <?= active('contact'); ?>">
 					<a class="nav-link" href="<?= "$path/contact"; ?>">Contacto</a>

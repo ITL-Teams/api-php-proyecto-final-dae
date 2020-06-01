@@ -7,7 +7,8 @@ require_once 'controllers/ContactController.php';
 require_once 'controllers/CreateServiceController.php';
 require_once 'controllers/TestServiceController.php';
 require_once 'controllers/SharedServiceController.php';
-
+require_once 'controllers/LoginController.php';
+require_once 'controllers/RegisterController.php';
 // Route dispatcher
 if(isset($_SERVER['PATH_INFO']))
 	$url = $_SERVER['PATH_INFO'];
@@ -21,6 +22,26 @@ switch ($url)
         $controller->show();
     break;
 
+	 case '/login':
+        $controller = new LoginController;
+        $controller->show();
+    break;
+
+ case '/create-account':
+        $controller = new RegisterController;
+        $controller->show();
+    break;
+
+ case '/create-account/register':
+        $controller = new RegisterController;
+        $controller->registerUser(
+                form ('email'),
+                form ('password'),
+                form ('name')
+            );
+    break;
+	
+	
     case '/user/home':
         $controller = new HomeController;
         $controller->show();
