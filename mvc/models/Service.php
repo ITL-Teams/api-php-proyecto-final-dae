@@ -9,19 +9,22 @@ class Service
     private $description;
     private $code;
     private $reference;
+    private $user;
 
     public function __construct(
         $type,
         $privacy,
         $service_name,
         $description,
-        $code
+        $code,
+        $user
     ) {
         $this->type         = $type;
         $this->privacy      = $privacy;
         $this->service_name = $service_name;
         $this->description  = $description;
         $this->code         = $code;
+        $this->user         = $user;
     }
 
     public function getId() {
@@ -52,6 +55,10 @@ class Service
         return $this->reference;
     }
 
+    public function getUser() {
+        return $this->user;
+    }
+
     public function setId($id) {
         $this->id = $id;
     }
@@ -78,5 +85,9 @@ class Service
 
     public function setReference($reference) {
         $this->reference = $reference;
+    }
+
+    public function setUser($user) {
+        $this->user = $user;
     }
 }

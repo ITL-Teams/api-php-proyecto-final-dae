@@ -49,15 +49,23 @@ class CreateServiceController
             $this->badRequest('That service doesn\'t exist');   
         }
 
-        $service = new Service(
-            $service_type,
-            $service_privacy,
-            $service_name,
-            $service_description,
-            $service_code
-        );
+        try
+        {
+            $service = new Service(
+                $service_type,
+                $service_privacy,
+                $service_name,
+                $service_description,
+                $service_code,
+                "example@example.com"
+            );
 
-        $this->serviceDao->create($service);
+            $this->serviceDao->create($service);
+
+        }catch(ExistingService $exception)
+        {
+            $this->badRequest('You already have this service name registered');
+        }
     }
 
     private function badRequest($description)

@@ -1,16 +1,17 @@
 <?php
 
-require_once 'dao.php';
+require_once 'service_dao.php';
 require_once 'models/Service.php';
+require_once 'services/exceptions/existing_service.php';
 
-class ServiceDAO implements DataAccessObject
+class ServiceDAO implements ServiceDataAccessObject
 {
     public function create($service)
     {
         $connection = DataBase::getConnection();
 
-        $sql  = "INSERT INTO services(type,privacy,service_name,description,code,reference) ";
-        $sql .= "VALUES (:type,:privacy,:service_name,:description,:code,:reference)";
+        $sql  = "INSERT INTO services(type,privacy,service_name,description,code,reference,user_email) ";
+        $sql .= "VALUES (:type,:privacy,:service_name,:description,:code,:reference,:user)";
 
         $statement = $connection->prepare($sql);
         $statement->execute([
@@ -19,8 +20,32 @@ class ServiceDAO implements DataAccessObject
             "service_name" => $service->getServiceName(),
             "description"  => $service->getDescription(),
             "code"         => $service->getCode(),
-            "reference"    => $service->getReference()
+            "reference"    => $service->getReference(),
+            "user"         => $service->getUser()
         ]);
+    }
+
+    public function findByName($user, $service_name)
+    {
+        /*$connection = DataBase::getConnection();
+        $statement = $connection->prepare("SELECT * FROM services WHERE id=:id");
+        $statement->execute(["id" => $id]);
+
+        $result_set = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        if(!$result_set)
+            return null;
+        
+        $service = new Service(
+            $result_set[0]['type'],
+            $result_set[0]['privacy'],
+            $result_set[0]['service_name'],
+            $result_set[0]['description'],
+            $result_set[0]['code'],
+            $result_set[0]['reference']
+        );
+        $service->setId($result_set[0]['id']);
+        return $service;*/
     }
 
     public function all()
@@ -39,7 +64,8 @@ class ServiceDAO implements DataAccessObject
                 $service['service_name'],
                 $service['description'],
                 $service['code'],
-                $service['reference']
+                $service['reference'],
+                $service['user_email']
             );
             $new_service->setId($service['id']);
             array_push($services, $new_service);
@@ -65,7 +91,8 @@ class ServiceDAO implements DataAccessObject
             $result_set[0]['service_name'],
             $result_set[0]['description'],
             $result_set[0]['code'],
-            $result_set[0]['reference']
+            $result_set[0]['reference'],
+            $result_set[0]['user_email']
         );
         $service->setId($result_set[0]['id']);
         return $service;
@@ -75,7 +102,7 @@ class ServiceDAO implements DataAccessObject
         $connection = DataBase::getConnection();
 
         $sql  = "UPDATE services ";
-        $sql .= "SET type=:type, privacy=:privacy, service_name=:service_name, description=:description, code=:code, reference=:reference";
+        $sql .= "SET type=:type, privacy=:privacy, service_name=:service_name, description=:description, code=:code, reference=:reference, user_email=:user";
         $sql .= "WHERE id=:id";
 
         $statement = $connection->prepare($sql);
@@ -86,7 +113,8 @@ class ServiceDAO implements DataAccessObject
             "service_name" => $service->getServiceName(),
             "description"  => $service->getDescription(),
             "code"         => $service->getCode(),
-            "reference"    => $service->getReference()
+            "reference"    => $service->getReference(),
+            "user"         => $service->getUser()
         ]);
     }
 

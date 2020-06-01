@@ -19,6 +19,7 @@ CREATE TABLE services (
     description  TEXT NOT NULL,
     code         TEXT NOT NULL,
     reference    VARCHAR(40),
+    user_email   VARCHAR(50) NOT NULL,
 
     PRIMARY KEY (id)
 );
@@ -30,11 +31,10 @@ CREATE TABLE auth_list (
 CREATE TABLE users ( 
     id           INT NOT NULL AUTO_INCREMENT,
     name         VARCHAR(50) NOT NULL,
-    email      VARCHAR(50) NOT NULL,
-    password VARCHAR(50) NOT NULL,
-    token  VARCHAR(20) NOT NULL,
+    email        VARCHAR(50) NOT NULL,
+    password     VARCHAR(50) NOT NULL,
+    token        VARCHAR(20) NOT NULL,
 
     PRIMARY KEY (id),
-	UNIQUE KEY (email,token)
-	
-	);
+    UNIQUE KEY (email,token)
+); 
