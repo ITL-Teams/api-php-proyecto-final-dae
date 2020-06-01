@@ -9,6 +9,8 @@ require_once 'controllers/TestServiceController.php';
 require_once 'controllers/SharedServiceController.php';
 require_once 'controllers/LoginController.php';
 require_once 'controllers/RegisterController.php';
+require_once 'controllers/ServicesController.php';
+require_once 'controllers/DocumentationController.php';
 // Route dispatcher
 if(isset($_SERVER['PATH_INFO']))
 	$url = $_SERVER['PATH_INFO'];
@@ -102,6 +104,16 @@ switch ($url)
     case '/user/services/test/execute':
         $controller = new TestServiceController;
         $controller->execute(form('service'));
+    break;
+
+    case '/documentation/regex':
+        $controller = new DocumentationController;
+        $controller->show();
+    break;
+
+    case '/user/services':
+        $controller = new ServicesController;
+        $controller->show();
     break;
 
     default:
