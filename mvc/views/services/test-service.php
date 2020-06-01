@@ -1,4 +1,4 @@
-<?php $GLOBALS['page_name'] = 'test-service'; ?>
+<?php $GLOBALS['page_name'] = 'service'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
