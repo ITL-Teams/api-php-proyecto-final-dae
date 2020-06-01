@@ -12,6 +12,7 @@
         <div class="title1 m-b-md">
             <?= "$code $message" ?>
         </div>
+        <h3><?= $description; ?></h3>
     </div>
 </body>
 </html>

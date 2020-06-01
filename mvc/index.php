@@ -75,7 +75,7 @@ function form($key) {
     return $_REQUEST[$key];
 }
 
-function error($code, $message)
+function error($code, $message, $description='')
 {
     http_response_code($code);
     require_once 'views/error.php';
