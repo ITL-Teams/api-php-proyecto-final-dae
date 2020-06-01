@@ -120,7 +120,7 @@ footer {
 
 
 </style>
-    <title>PHP 7 Login</title>
+    <title>NetWS Login</title>
 	
     <!-- Required meta tags -->
     <meta charset="utf-8">

@@ -10,11 +10,11 @@
 	<?php require_once 'layouts/navbar.php'; ?>
 	<div class="content">
         <div class="title1 m-b-md">
-            Bienvenido a NetWS
+            Welcome to NetWS
         </div>
             
         <center><img src="<?= "$GLOBALS[assets]/img/team-logo.png" ?>"  height="250px"></center>
-        <center>desarrollado por <b>Bug Developers</b></center>
+        <center>Developed by <b>Bug Developers</b></center>
         <br><br>
     </div>
 </body>

@@ -7,7 +7,7 @@
       </head>
        <body style="background-color:white">
  <?php require_once 'views/layouts/navbar.php'; ?> 
-    <title>Register</title>
+    <title>NetWS Register</title>
     
   <!-- Required meta tags -->
     <meta charset="utf-8">

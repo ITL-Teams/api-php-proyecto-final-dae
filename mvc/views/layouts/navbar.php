@@ -19,21 +19,22 @@
 		<?php if(isset($_SESSION['user_email'])) { ?>
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item <?= active('home'); ?>">
-					<a class="nav-link" href="<?= "$GLOBALS[path]/user/home" ?>">Inicio</a>
+					<a class="nav-link" href="<?= "$GLOBALS[path]/user/home" ?>">Home</a>
 				</li>
 				<li class="nav-item <?= active('contact'); ?>">
-					<a class="nav-link" href="<?= "$GLOBALS[path]/contact"; ?>">Soporte</a>
+					<a class="nav-link" href="<?= "$GLOBALS[path]/contact"; ?>">Support</a>
 				</li>
 
 				<li class="nav-item dropdown <?= active('service'); ?>">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Servicio
+						Services
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="#">Configurar un dispositivo</a>
-						<a class="dropdown-item" href="#">Panel de dispositivos</a>
+						<a class="dropdown-item" href="#">Your services</a>
+						<a class="dropdown-item" href="<?= "$GLOBALS[path]/user/services/create"; ?>">Create new service</a>
+						<a class="dropdown-item" href="#">Test a service</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">Mi cuenta</a>
+						<a class="dropdown-item" href="#">My Account</a>
 					</div>
 				</li>
 			</ul>
@@ -47,13 +48,13 @@
 		<?php } else { ?>
 			<ul class="navbar-nav">
 				<li class="nav-item <?= active('login'); ?>">
-					<a class="nav-link"  href="<?= "$GLOBALS[path]/login";?>">Iniciar Sesión</a>
+					<a class="nav-link"  href="<?= "$GLOBALS[path]/login";?>">Login</a>
 				</li>
 				<li class="nav-item <?= active('register'); ?>">
-					<a class="nav-link"  href="<?= "$GLOBALS[path]/create-account";?>">Registrarse</a>
+					<a class="nav-link"  href="<?= "$GLOBALS[path]/create-account";?>">Register</a>
 				</li>
 				<li class="nav-item <?= active('contact'); ?>">
-					<a class="nav-link" href="<?= "$GLOBALS[path]/contact"; ?>">Contacto</a>
+					<a class="nav-link" href="<?= "$GLOBALS[path]/contact"; ?>">Contact</a>
 				</li>
 			<ul>
 		<?php } ?>
