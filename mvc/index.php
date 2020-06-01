@@ -26,13 +26,18 @@ switch ($url)
         $controller = new LoginController;
         $controller->show();
     break;
+
+    case '/logout':
+        $controller = new LoginController;
+        $controller->logout();
+    break;
 	
-	
-	   case '/login/authenticate':
+	case '/login/authenticate':
         $controller = new LoginController;
         $controller->authUsser(
-                    form('email'),
-                    form('password'));
+            form('email'),
+            form('password')
+        );
     break;
 
  case '/create-account':

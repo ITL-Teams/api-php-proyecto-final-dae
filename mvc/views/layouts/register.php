@@ -52,9 +52,9 @@
     </form>   
     </div>    
     <div class="col-sm-12 col-md-6 col-lg-6">
-        <img src="<?= "$assets/img/team-logo.png" ?>" class="img-responsive" alt="PHP MySQL logos">
+        <img src="<?= "$GLOBALS[assets]/img/team-logo.png" ?>" class="img-responsive" alt="PHP MySQL logos">
       <h3>Log in</h3><hr />
-      <p>Already have an account? <a href="<?= "$path/login";?>">Login Here</a>
+      <p>Already have an account? <a href="<?= "$GLOBALS[path]/login";?>">Login Here</a>
     </div>
 
   </div>

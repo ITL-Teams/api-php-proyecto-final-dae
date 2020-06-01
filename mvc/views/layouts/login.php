@@ -1,5 +1,3 @@
-
-
 <?php $GLOBALS['page_name'] = 'login'; ?>
 
    <head>
@@ -140,7 +138,7 @@ footer {
 <div class="row">
   <div class="column">
   
-    <img src="<?= "$assets/img/team-logo.png" ?>" class="img-responsive" alt="PHP MySQL logos">
+    <img src="<?= "$GLOBALS[assets]/img/team-logo.png" ?>" class="img-responsive" alt="PHP MySQL logos">
   </div>
   
   <div class="column">
@@ -168,7 +166,7 @@ footer {
 						</form>
 						<form action="register.php">
 							or
-							<p>Sing in <a href="<?= "$path/create-account";?>">click here</a>
+							<p>Sing in <a href="<?= "$GLOBALS[path]/create-account";?>">click here</a>
 							
 
 

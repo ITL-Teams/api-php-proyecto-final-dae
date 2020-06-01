@@ -22,7 +22,7 @@
 					<div class="col-md-3">
 						<p class="title">REGEX</p>
 						<p align="center">
-							<img src="<?= "$assets/img/regex.png" ?>" width="100px">
+							<img src="<?= "$GLOBALS[assets]/img/regex.png" ?>" width="100px">
 						</p>
 					</div>
 					<div class="col-md-9">
@@ -48,7 +48,7 @@
 					<div class="form-row margin2">
 						<div class="col-md-12">
 							<p align="center">
-								<img src="<?= "$assets/img/brand-logo.png" ?>" width="200px">
+								<img src="<?= "$GLOBALS[assets]/img/brand-logo.png" ?>" width="200px">
 							</p>
 							<p class="title">
 								PREMIUM

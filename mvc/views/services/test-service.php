@@ -69,7 +69,7 @@
 							<div class="form-row">&nbsp;</div>
 						</div>
 						<div class="col-md-6">
-							<img src="<?= "$assets/img/regex.png" ?>" width="100px">
+							<img src="<?= "$GLOBALS[assets]/img/regex.png" ?>" width="100px">
 						</div>
 					</div>
 					<br><br>
