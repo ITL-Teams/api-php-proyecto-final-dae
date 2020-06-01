@@ -25,7 +25,7 @@
 							</label>
 						</div>
 						<div class="col-md-10">
-							<textarea class="form-control" rows="5" name="code" readonly="true">
+							<textarea class="form-control" rows="5" name="code" readonly="true"><?= $service->getCode() ?>
 							</textarea>
 						</div>
 					</div>

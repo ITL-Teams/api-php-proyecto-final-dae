@@ -27,9 +27,12 @@ class ServiceDAO implements ServiceDataAccessObject
 
     public function findByName($user, $service_name)
     {
-        /*$connection = DataBase::getConnection();
-        $statement = $connection->prepare("SELECT * FROM services WHERE id=:id");
-        $statement->execute(["id" => $id]);
+        $connection = DataBase::getConnection();
+        $statement = $connection->prepare("SELECT * FROM services WHERE user_email=:user and service_name=:service_name");
+        $statement->execute([
+            "user"         => $user,
+            "service_name" => $service_name
+        ]);
 
         $result_set = $statement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -42,10 +45,11 @@ class ServiceDAO implements ServiceDataAccessObject
             $result_set[0]['service_name'],
             $result_set[0]['description'],
             $result_set[0]['code'],
-            $result_set[0]['reference']
+            $result_set[0]['reference'],
+            $result_set[0]['user_email']
         );
         $service->setId($result_set[0]['id']);
-        return $service;*/
+        return $service;
     }
 
     public function all()

@@ -91,7 +91,12 @@ switch ($url)
 
     case '/user/services/test':
         $controller = new TestServiceController;
-        $controller->show();
+        $controller->show(form('service'));
+    break;
+
+    case '/user/services/test/execute':
+        $controller = new TestServiceController;
+        $controller->execute(form('service'));
     break;
 
     default:
