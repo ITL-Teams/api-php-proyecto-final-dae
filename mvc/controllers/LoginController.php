@@ -1,41 +1,54 @@
 <?php
+
+require_once 'auth/Auth.php';
 require_once 'models/db/dao/UserDAO.php';
-class LoginController
+
+class LoginController extends Auth
 {
-  private $userDao;
-  public function __construct()
-  {
-    $this->userDao = new UserDAO;
-  }
-	public function show(){
-    require_once 'views/layouts/login.php';
+    private $userDao;
+    public function __construct()
+    {
+        $this->afterLogin();
+        $this->userDao = new UserDAO;
+    }
 
-  }
+    public function show(){
+        require_once 'views/layouts/login.php';
+    }
 
-  public function authUsser(
-          $email,
-          $password)
+    public function logout()
+    {
+        @session_start();
+        unset($_SESSION['user_email']);
+        header("Location: $GLOBALS[path]");
+    }
+
+    public function authUsser(
+        $email,
+        $password)
+    {
+        if (empty($email )||
+            empty($password) )
         {
-          if (empty($email )||
-               empty($password) ){
-
             error(400, 'Bad request');
-  return;
+            return;
+        }
 
-          }
- $user=$this->userDao->findEmail($email);
-if (empty($user)){
-  error (500, "usario no encontrado");
+        $user=$this->userDao->findEmail($email);
 
-}else if ($password==$user->getPassword()){
-  $_SESSION['user_email']=$user->getEmail();
-  require_once "views/home.php";
-
-}
-  else {
-    error (501, "usario no encontrado");
-  } 
-
-
+        if (empty($user))
+        {
+            error (500, "usario no encontrado");
+        }
+        else if ($password==$user->getPassword())
+        {
+            session_start();
+            $_SESSION['user_email']=$user->getEmail();
+            header("Location: $GLOBALS[path]/user/home");
+        }
+        else
+        {
+            error (501, "usario no encontrado");
         } 
+    } 
 }

@@ -1,13 +1,15 @@
 <?php
 
+require_once 'auth/Auth.php';
 require_once 'models/db/dao/ServiceDAO.php';
 
-class CreateServiceController
+class CreateServiceController extends Auth
 {
     private $serviceDao;
 
     public function __construct()
     {
+        $this->needLogin();
         $this->serviceDao = new ServiceDAO;
     }
 

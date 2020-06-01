@@ -1,25 +1,39 @@
 <?php
 
+require_once 'auth/Auth.php';
 require_once 'models/db/dao/ServiceDAO.php';
 require_once 'services/implementation/RegexService.php';
 
-class TestServiceController
+class TestServiceController extends Auth
 {
     private $serviceDao;
 
     public function __construct()
     {
+        $this->needLogin();
         $this->serviceDao = new ServiceDAO;
     }
 
 	public function show($service_name)
 	{
-		if(empty($service_name))
-		{
-             $this->badRequest('You must provide a valid service name');
-		}
+        @session_start();
 
-        $service = $this->serviceDao->findByName("example@example.com", $service_name);
+		try
+        {
+            if(!isset($_SESSION['user_email']))
+                throw new Exception("User not logged");
+                
+            $service = $this->serviceDao->findByName($_SESSION['user_email'], $service_name);
+
+            if(!$service)
+                throw new Exception("Service not found");
+                
+        }
+        catch(Exception $exception)
+        {
+            error(403, "Forbidden", $exception->getMessage());
+            exit;
+        }
 
 		require_once 'views/services/test-service.php';
 	}
@@ -27,16 +41,21 @@ class TestServiceController
 	public function execute($service_name)
 	{
 		@session_start();
+
 		try
 		{
 			if(!isset($_SESSION['user_email']))
-				throw new Exception();
+				throw new Exception("User not logged");
 				
             $service = $this->serviceDao->findByName($_SESSION['user_email'], $service_name);
+
+            if(!$service)
+                throw new Exception("Service not found");
+                
 		}
 		catch(Exception $exception)
         {
-        	error(403, "Forbidden");
+        	error(403, "Forbidden", $exception->getMessage());
         	exit;
         }
 
@@ -56,12 +75,4 @@ class TestServiceController
             echo "Unexecutable Service";
         }
 	}
-
-    private function badRequest($description)
-    {
-        $redirect_message = "<strong>Try Again. </strong>You'll be redirected in 5 seconds";
-        error(400, 'Bad Request',"$description<br>$redirect_message");
-        header('refresh:5; url=../services');
-        exit;
-    }
 }
