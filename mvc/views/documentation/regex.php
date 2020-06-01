@@ -1,4 +1,4 @@
-<?php $GLOBALS['page_name'] = 'regex'; ?>
+<?php $GLOBALS['page_name'] = 'docs'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +31,7 @@
 	<div class="container mt-4">
 		<div class="content">
 			<p class="title bold">
-				<img src="<?= "$GLOBALS[assets]/img/regex.png" ?>" width="100px"> Regex
+				<img src="<?= "$GLOBALS[assets]/img/regex.png" ?>" style="border-radius: 15px" width="100px"> Regex
 			</p>	
 			<p class="paragraph">
 			Regex (Expresión Regular) es una secuencia de caracteres que conforma un patrón 

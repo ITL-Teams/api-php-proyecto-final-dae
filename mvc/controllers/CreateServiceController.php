@@ -59,10 +59,12 @@ class CreateServiceController extends Auth
                 $service_name,
                 $service_description,
                 $service_code,
-                "example@example.com"
+                $_SESSION['user_email']
             );
 
             $this->serviceDao->create($service);
+
+            header("Location: $GLOBALS[path]/user/services");
 
         }catch(ExistingService $exception)
         {
@@ -73,8 +75,8 @@ class CreateServiceController extends Auth
     private function badRequest($description)
     {
         $redirect_message = "<strong>Try Again. </strong>You'll be redirected in 5 seconds";
-        error(400, 'Bad Request',"$description<br>$redirect_message");
         header('refresh:5; url=../create');
+        error(400, 'Bad Request',"$description<br>$redirect_message");
         exit;
     }
 

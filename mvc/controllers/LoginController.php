@@ -8,11 +8,11 @@ class LoginController extends Auth
     private $userDao;
     public function __construct()
     {
-        $this->afterLogin();
         $this->userDao = new UserDAO;
     }
 
     public function show(){
+        $this->afterLogin();
         require_once 'views/layouts/login.php';
     }
 
@@ -27,6 +27,8 @@ class LoginController extends Auth
         $email,
         $password)
     {
+        $this->afterLogin();
+        
         if (empty($email )||
             empty($password) )
         {

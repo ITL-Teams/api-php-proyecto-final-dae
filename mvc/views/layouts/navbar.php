@@ -30,11 +30,19 @@
 						Services
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="#">Your services</a>
+						<a class="dropdown-item" href="<?= "$GLOBALS[path]/user/services";?>">My services</a>
 						<a class="dropdown-item" href="<?= "$GLOBALS[path]/user/services/create"; ?>">Create new service</a>
-						<a class="dropdown-item" href="#">Test a service</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="#">My Account</a>
+					</div>
+				</li>
+
+				<li class="nav-item dropdown <?= active('docs'); ?>">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Docs
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="<?= "$GLOBALS[path]/documentation/regex" ?>">Regex</a>
 					</div>
 				</li>
 			</ul>
