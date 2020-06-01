@@ -28,7 +28,7 @@ class ServiceDAO implements ServiceDataAccessObject
     public function findByName($user, $service_name)
     {
         $connection = DataBase::getConnection();
-        $statement = $connection->prepare("SELECT * FROM services WHERE user_email=:user and service_name=:service_name");
+        $statement = $connection->prepare("SELECT * FROM services WHERE user_email=:user and BINARY service_name=:service_name");
         $statement->execute([
             "user"         => $user,
             "service_name" => $service_name
@@ -50,6 +50,34 @@ class ServiceDAO implements ServiceDataAccessObject
         );
         $service->setId($result_set[0]['id']);
         return $service;
+    }
+
+    public function findByUser($user)
+    {
+        $connection = DataBase::getConnection();
+        $statement = $connection->prepare("SELECT * FROM services WHERE user_email=:user");
+        $statement->execute([
+            "user" => $user,
+        ]);
+
+        $result_set = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        $services = [];
+        foreach ($result_set as $service) {
+            $new_service = new Service(
+                $service['type'],
+                $service['privacy'],
+                $service['service_name'],
+                $service['description'],
+                $service['code'],
+                $service['reference'],
+                $service['user_email']
+            );
+            $new_service->setId($service['id']);
+            array_push($services, $new_service);
+        }
+
+        return $services;
     }
 
     public function all()
@@ -75,7 +103,7 @@ class ServiceDAO implements ServiceDataAccessObject
             array_push($services, $new_service);
         }
 
-        return $service;
+        return $services;
     }
 
     public function find($id)

@@ -57,7 +57,7 @@
 			<div>
 				<div class="content">
 					<?php foreach ($services as $service): ?>
-						<a href="<?= "$GLOBALS[path]/user/services?service=".$service->getServiceName() ?>">
+						<a href="<?= "$GLOBALS[path]/user/services/test?service=".$service->getServiceName() ?>">
 							<span class="btn">
 								<p class="mb-0"><?= $service->getDescription() ?></p>
 								<img src="<?= "$GLOBALS[assets]/img/regex.png" ?>" style="border-radius: 15px" width="80px">
