@@ -1,6 +1,6 @@
 <?php
 
-require_once 'dao.php';
+require_once 'UserSessionDAO.php';
 require_once 'models/User.php';
 
 class UserDAO implements DataAccessObject
@@ -15,9 +15,9 @@ class UserDAO implements DataAccessObject
         $statement = $connection->prepare($sql);
         $statement->execute([
             "name"  => $users->getName(),
-            "mail" => $users->getEmail(),
+            "email" => $users->getEmail(),
             "password"  => $users->getPassword(),
-             "token"  => $users->getToken()
+            "token"  => $users->getToken()
             
         ]);
     }
@@ -56,14 +56,40 @@ class UserDAO implements DataAccessObject
         if(!$result_set)
             return null;
         
-        $users = new users(
+        $users = new User(
             $result_set[0]['name'],
-            $result_set[0]['mail'],
-            $result_set[0]['password']
+            $result_set[0]['email'],
+            $result_set[0]['password'],
+             $result_set[0]['token']
         );
         $users->setId($result_set[0]['id']);
         return $users;
     }
+
+
+ public function findEmail($email)
+    {
+        $connection = DataBase::getConnection();
+        $statement = $connection->prepare("SELECT * FROM users WHERE email=:email");
+        $statement->execute(["email" => $email]);
+
+        $result_set = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        if(!$result_set)
+            return null;
+        
+        $users = new User(
+            $result_set[0]['email'],
+            $result_set[0]['password'],
+            $result_set[0]['name'],
+             $result_set[0]['token']
+        );
+        $users->setId($result_set[0]['id']);
+        return $users;
+    }
+
+
+
 
     public function update($users) {
         $connection = DataBase::getConnection();

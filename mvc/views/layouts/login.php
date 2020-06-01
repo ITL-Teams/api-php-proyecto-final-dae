@@ -152,9 +152,9 @@ footer {
 			<div class="card" style="text-align: left;">
 					<div class="loginBox">
 
-						<form action="#" method="post">                           	
+						<form action="./login/authenticate" method="post">                           	
 							<div class="form-group">									
-							<input type="email" class="form-control input-lg" name="Ussers" placeholder="Ussers" required>        
+							<input type="email" class="form-control input-lg" name="email" placeholder=" example@mail.com" required>        
 							</div>							
 							<div class="form-group">        
 							<input type="password" class="form-control input-lg" name="password" placeholder="Password" required>       
@@ -164,11 +164,11 @@ footer {
 								I Forgot my password
 							</a>
 								<br>
-							<button type="submit" class="btn btn-success btn-block">Log in</button>
+							<input type="submit" class="btn btn-success btn-block" value="Log-in">
 						</form>
 						<form action="register.php">
 							or
-							<p>Sing in <a href="<?= "$path/register";?>">click here</a>
+							<p>Sing in <a href="<?= "$path/create-account";?>">click here</a>
 							
 
 
