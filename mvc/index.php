@@ -103,7 +103,7 @@ switch ($url)
 
     case '/user/services/test/execute':
         $controller = new TestServiceController;
-        $controller->execute(form('service'));
+        $controller->execute(form('service'), form('input'));
     break;
 
     case '/documentation/regex':

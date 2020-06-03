@@ -37,8 +37,7 @@
 							</label>
 						</div>
 						<div class="col-md-10">
-							<textarea class="form-control" rows="8" name="output" readonly="true">
-							</textarea>
+							<textarea id="output" class="form-control" rows="8" name="output" readonly="true"></textarea>
 						</div>
 					</div>
 					<hr>
@@ -49,8 +48,7 @@
 							</label>
 						</div>
 						<div class="col-md-10">
-							<textarea class="form-control" rows="3" name="input">
-							</textarea>
+							<textarea id="input" class="form-control" rows="3" name="input"></textarea>
 						</div>
 					</div>
 				</div>
@@ -85,12 +83,61 @@
 					<br><br>
 					<div class="form-row">
 						<div class="col-md-3"></div>
-						<input type="submit" class="btn btn-success btn-sm title col-md-6" 
+						<input type="button" class="btn btn-success btn-sm title col-md-6" id="test" 
 							value="Test">
 						<div class="col-md-3"></div>
 					</div>
 				</div>
 			</form>
 		</div>
+
+		<script>
+			window.onload = function()
+			{
+ 				$('#test').click(test)
+			}
+
+			function test()
+			{
+				$.ajax({
+					type: 'post',
+					//url:  '<?= "$GLOBALS[path]/user/services/test/execute?service=".$service->getServiceName() ?>',
+					url:  '<?= "$GLOBALS[path]/user/services/test/execute" ?>',
+
+					data: { 
+						service: "<?= $service->getServiceName() ?>",
+						input:   $('#input').val()
+					},
+
+					dataType: 'json',
+
+					success: function(response) {
+						response = JSON.stringify(response)
+						validResponse(response)
+					},
+
+					error: function(response)
+					{
+						error(response)
+					}
+				})
+			}
+
+			function error(response)
+			{
+				var message;
+				message  = 'HTTP ' + response.status + '-' + response.statusText +'\n';
+				message += 'Response: ' + response.responseText;
+				$('#output').text(message)
+			}
+
+			function validResponse(response)
+			{
+				var message;
+				message  = 'HTTP 200 - OK\n'
+				message += 'Reponse: ' + response
+				$('#output').text(message)
+			}
+		</script>
 	</body>
 </html>

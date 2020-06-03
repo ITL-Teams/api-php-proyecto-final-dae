@@ -5,7 +5,6 @@ class Contact
     private $id;
     private $email;
     private $comment;
-    private $connection;
 
     public function __construct(
         $email,
@@ -13,7 +12,6 @@ class Contact
     ) {
         $this->email      = $email;
         $this->comment    = $comment;
-        $this->connection = DataBase::getConnection();
     }
 
     public function getId() {

@@ -19,7 +19,7 @@ class RegexService extends AbstractService
         }
     	catch(NotJsonException $exception)
         {
-            throw new UnexecutableService();
+            throw new UnexecutableService('Not a Json');
         }
 
     	$regex_type  = $this->getRegexType($code);
@@ -29,7 +29,7 @@ class RegexService extends AbstractService
             $string  = $this->getString($input);
         }
         catch(NotInputFoundException $exception) {
-            throw new UnexecutableService();
+            throw new UnexecutableService('Input is required');
         }
 
         $response['success'] = preg_match($regex, $string);
@@ -51,7 +51,7 @@ class RegexService extends AbstractService
                     $replacement = $this->getReplacement($input);
                 }
                 catch(NotInputFoundException $exception) {
-                	throw new UnexecutableService();
+                	throw new UnexecutableService('Replacement is required');
                 }
                 
                 $string = preg_replace($regex, $replacement, $string);

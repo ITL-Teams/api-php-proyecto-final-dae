@@ -38,25 +38,24 @@ class TestServiceController extends Auth
 		require_once 'views/services/test-service.php';
 	}
 
-	public function execute($service_name)
+	public function execute($service_name, $input)
 	{
 		@session_start();
 
 		try
 		{
-			if(!isset($_SESSION['user_email']))
-				throw new Exception("User not logged");
+            if(!isset($input))
+                throw new Exception("Input is required");
 				
             $service = $this->serviceDao->findByName($_SESSION['user_email'], $service_name);
 
-            if(!$service)
+            if(empty($service))
                 throw new Exception("Service not found");
                 
 		}
 		catch(Exception $exception)
         {
-        	error(403, "Forbidden", $exception->getMessage());
-        	exit;
+            $this->unexecutable(403, $exception->getMessage());
         }
 
         $service_executable = new RegexService(
@@ -65,14 +64,28 @@ class TestServiceController extends Auth
             $service->getDescription(),
             $service->getCode()
         );
+        
         try
         {
-            $response = $service_executable->executeService('{"input":"hola"}');
-            echo $response;
+            $response = $service_executable->executeService($input);
+            $this->response($response);
         }
         catch(UnexecutableService $exception)
         {
-            echo "Unexecutable Service";
+            $this->unexecutable(403, $exception->getMessage());
         }
 	}
+
+    private function unexecutable($code, $message = '')
+    {
+        http_response_code($code);
+        echo "Unexecutable Service : $message";
+        exit;
+    }
+
+    private function response($response)
+    {
+        http_response_code(200);
+        echo $response;
+    }
 }
