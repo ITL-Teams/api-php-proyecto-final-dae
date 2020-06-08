@@ -5,6 +5,7 @@ require_once 'controllers/MainPageController.php';
 require_once 'controllers/HomeController.php';
 require_once 'controllers/ContactController.php';
 require_once 'controllers/CreateServiceController.php';
+require_once 'controllers/EditServiceController.php';
 require_once 'controllers/TestServiceController.php';
 require_once 'controllers/SharedServiceController.php';
 require_once 'controllers/LoginController.php';
@@ -94,6 +95,23 @@ switch ($url)
     case '/user/services/create/shared':
         $controller = new SharedServiceController;
         $controller->show(form('service'));
+    break;
+
+    case '/user/services/edit':
+        $controller = new EditServiceController;
+        $controller->show(form('service'));
+    break;
+
+    case '/user/services/edit/register':
+        $controller = new EditServiceController;
+        $controller->updateService(
+            form('id'),
+            form('type'),
+            form('privacy'),
+            form('name'),
+            form('description'),
+            form('code')
+        );
     break;
 
     case '/user/services/test':

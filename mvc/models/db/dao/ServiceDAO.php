@@ -148,7 +148,7 @@ class ServiceDAO implements ServiceDataAccessObject
 
         $sql  = "UPDATE services ";
         $sql .= "SET type=:type, privacy=:privacy, service_name=:service_name, description=:description, code=:code, reference=:reference, user_email=:user";
-        $sql .= "WHERE id=:id";
+        $sql .= " WHERE id=:id";
 
         $statement = $connection->prepare($sql);
         $statement->execute([

@@ -15,7 +15,12 @@
 	<body>
 		<?php require_once("views/layouts/navbar.php"); ?>
 	<br><br>
-		<div class="container">
+			<div class="container mb-2">
+				<h2 class="h3">
+					<a href="<?= "$GLOBALS[path]/user/services/edit?service=$service_name" ?>"><span class="badge badge-info">Edit</span></a>
+				</h2>
+			</div>
+			<div class="container">
 			<form action="" method="POST" class="form-row">
 				<div class="col-md-8">
 					<div class="form-row">
