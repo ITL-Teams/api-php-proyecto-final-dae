@@ -33,7 +33,7 @@
 						<a class="dropdown-item" href="<?= "$GLOBALS[path]/user/services";?>">My services</a>
 						<a class="dropdown-item" href="<?= "$GLOBALS[path]/user/services/create"; ?>">Create new service</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">My Account</a>
+						<a class="dropdown-item" href="<?= "$GLOBALS[path]/user/account"; ?>">My Account</a>
 					</div>
 				</li>
 

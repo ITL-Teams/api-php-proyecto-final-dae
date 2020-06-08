@@ -34,6 +34,7 @@ CREATE TABLE users (
     email        VARCHAR(50) NOT NULL,
     password     VARCHAR(50) NOT NULL,
     token        VARCHAR(20) NOT NULL,
+    user_type    VARCHAR(20) NOT NULL,
 
     PRIMARY KEY (id),
     UNIQUE KEY (email,token)

@@ -12,6 +12,8 @@ require_once 'controllers/LoginController.php';
 require_once 'controllers/RegisterController.php';
 require_once 'controllers/ServicesController.php';
 require_once 'controllers/DocumentationController.php';
+require_once 'controllers/AccountController.php';
+
 // Route dispatcher
 if(isset($_SERVER['PATH_INFO']))
 	$url = $_SERVER['PATH_INFO'];
@@ -131,6 +133,11 @@ switch ($url)
 
     case '/user/services':
         $controller = new ServicesController;
+        $controller->show();
+    break;
+
+    case '/user/account':
+        $controller = new AccountController;
         $controller->show();
     break;
 

@@ -9,16 +9,16 @@ class UserDAO implements DataAccessObject
     {
         $connection = DataBase::getConnection();
 
-        $sql  = "INSERT INTO users(name,email,password,token) ";
-        $sql .= "VALUES (:name,:email,:password,:token)";
+        $sql  = "INSERT INTO users(name,email,password,token,user_type) ";
+        $sql .= "VALUES (:name,:email,:password,:token,:user_type)";
 
         $statement = $connection->prepare($sql);
         $statement->execute([
-            "name"  => $users->getName(),
-            "email" => $users->getEmail(),
+            "name"      => $users->getName(),
+            "email"     => $users->getEmail(),
             "password"  => $users->getPassword(),
-            "token"  => $users->getToken()
-            
+            "token"     => $users->getToken(),
+            "user_type" => $users->getUserType()
         ]);
     }
 
@@ -33,7 +33,6 @@ class UserDAO implements DataAccessObject
         $users = [];
         foreach ($result_set as $users) {
             $new_users = new users(
-          
                 $users['name'],
                 $users['mail'],
                 $users['password']
@@ -95,15 +94,16 @@ class UserDAO implements DataAccessObject
         $connection = DataBase::getConnection();
 
         $sql  = "UPDATE users ";
-        $sql .= "SET name=:name, mail=:mail, password=:password";
-        $sql .= "WHERE id=:id";
+        $sql .= "SET name=:name, mail=:mail, password=:password, token=:token, user_type=:user_type";
+        $sql .= " WHERE id=:id";
 
         $statement = $connection->prepare($sql);
         $statement->execute([
-            "id"           => $service->getId(),
-            "name"         => $service->getName(),
-            "mail"      => $service->getMail(),
-            "password" => $service->getPassword()
+            "name"      => $users->getName(),
+            "email"     => $users->getEmail(),
+            "password"  => $users->getPassword(),
+            "token"     => $users->getToken(),
+            "user_type" => $users->getUserType()
         ]);
     }
 
