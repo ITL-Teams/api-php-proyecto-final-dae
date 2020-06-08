@@ -23,4 +23,20 @@ class Auth
             exit;
         }
     }
+
+    protected function needPremium()
+    {
+        @session_start();
+        if(!isset($_SESSION['user_type']))
+        {
+            error(403, 'Forbidden');
+            exit;
+        }
+
+        if($_SESSION['user_type'] != 'premium')
+        {
+            error(403, 'Forbidden', 'You\'re not premium, please uptade your account');
+            exit;   
+        }
+    }
 }

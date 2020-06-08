@@ -10,6 +10,7 @@ class ServicesController extends Auth
 	public function __construct()
     {
         $this->needLogin();
+        $this->needPremium();
         $this->serviceDao = new ServiceDAO;
     }
     

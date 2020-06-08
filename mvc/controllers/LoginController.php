@@ -20,6 +20,7 @@ class LoginController extends Auth
     {
         @session_start();
         unset($_SESSION['user_email']);
+        unset($_SESSION['user_type']);
         header("Location: $GLOBALS[path]");
     }
 
@@ -45,7 +46,8 @@ class LoginController extends Auth
         else if ($password==$user->getPassword())
         {
             session_start();
-            $_SESSION['user_email']=$user->getEmail();
+            $_SESSION['user_email'] = $user->getEmail();
+            $_SESSION['user_type']  = $user->getUserType();
             header("Location: $GLOBALS[path]/user/home");
         }
         else

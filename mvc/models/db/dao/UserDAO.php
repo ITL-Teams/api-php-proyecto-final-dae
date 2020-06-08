@@ -81,9 +81,10 @@ class UserDAO implements DataAccessObject
             $result_set[0]['email'],
             $result_set[0]['password'],
             $result_set[0]['name'],
-             $result_set[0]['token']
+            $result_set[0]['token']
         );
         $users->setId($result_set[0]['id']);
+        $users->setUserType($result_set[0]['user_type']);
         return $users;
     }
 
