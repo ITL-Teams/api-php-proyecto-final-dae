@@ -64,7 +64,10 @@ class CreateServiceController extends Auth
 
             $this->serviceDao->create($service);
 
-            header("Location: $GLOBALS[path]/user/services");
+            if($service_privacy == 'shared')
+                header("Location: $GLOBALS[path]/user/services/create/shared?service=$service_name");
+            else
+                header("Location: $GLOBALS[path]/user/services");
 
         }catch(ExistingService $exception)
         {

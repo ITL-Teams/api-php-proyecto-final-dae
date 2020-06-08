@@ -93,7 +93,7 @@ switch ($url)
 
     case '/user/services/create/shared':
         $controller = new SharedServiceController;
-        $controller->show();
+        $controller->show(form('service'));
     break;
 
     case '/user/services/test':
@@ -130,4 +130,5 @@ function error($code, $message, $description='')
 {
     http_response_code($code);
     require_once 'views/error.php';
+    exit;
 }

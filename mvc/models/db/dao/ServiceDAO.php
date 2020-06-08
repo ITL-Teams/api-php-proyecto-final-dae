@@ -25,6 +25,19 @@ class ServiceDAO implements ServiceDataAccessObject
         ]);
     }
 
+    public function addSharedUser($sharedUser)
+    {
+        $connection = DataBase::getConnection();
+
+        $sql  = "INSERT INTO auth_list(referece, token) VALUES (:referece, :token)";
+
+        $statement = $connection->prepare($sql);
+        $statement->execute([
+            "referece" => $sharedUser->getReference(),
+            "token"    => $sharedUser->getToken()
+        ]);
+    }
+
     public function findByName($user, $service_name)
     {
         $connection = DataBase::getConnection();
