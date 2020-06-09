@@ -67,6 +67,12 @@ class EditServiceController extends Auth
             $this->badRequest('That service doesn\'t exist');   
         }
 
+        if( $this->serviceAlreadyExists($service_name) &&
+           !$this->serviceNameIsSame($service_name, $service_id))
+        {
+            $this->badRequest('This service already exists');
+        }
+
         try
         {
             $service = new Service(
@@ -91,9 +97,7 @@ class EditServiceController extends Auth
 
     private function badRequest($description)
     {
-        $redirect_message = "<strong>Try Again. </strong>You'll be redirected in 5 seconds";
-        header('refresh:5; url=../create');
-        error(400, 'Bad Request',"$description<br>$redirect_message");
+        error(400, 'Bad Request',$description);
         exit;
     }
 
@@ -115,5 +119,17 @@ class EditServiceController extends Auth
         ];
 
         return in_array($service_type, $services);
+    }
+
+    private function serviceAlreadyExists($service_name)
+    {
+        $service = $this->serviceDao->findByService($service_name);
+        return $service != null;
+    }
+
+    private function serviceNameIsSame($old_service_name, $actual_service_id)
+    {
+        $service = $this->serviceDao->find($actual_service_id);
+        return $service->getServiceName() == $old_service_name;
     }
 }
