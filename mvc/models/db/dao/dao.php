@@ -6,7 +6,7 @@ interface DataAccessObject
 {
     function all();
     function find($id);
-    function delete($id);
+    function delete($entity);
     function update($entity);
     function create($entity);
 }

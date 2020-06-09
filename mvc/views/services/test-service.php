@@ -18,6 +18,7 @@
 			<div class="container mb-2">
 				<h2 class="h3">
 					<a href="<?= "$GLOBALS[path]/user/services/edit?service=$service_name" ?>"><span class="badge badge-info">Edit</span></a>
+					<a href="<?= "$GLOBALS[path]/user/services/delete?service=$service_name" ?>"><span class="badge badge-danger">Delete</span></a>
 				</h2>
 			</div>
 			<div class="container">

@@ -94,6 +94,11 @@ switch ($url)
         );
     break;
 
+    case '/user/services/delete':
+        $controller = new CreateServiceController;
+        $controller->deleteService(form('service'));
+    break;
+
     case '/user/services/create/shared':
         $controller = new SharedServiceController;
         $controller->show(form('service'));

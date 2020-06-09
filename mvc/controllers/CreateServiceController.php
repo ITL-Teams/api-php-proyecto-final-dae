@@ -52,6 +52,11 @@ class CreateServiceController extends Auth
             $this->badRequest('That service doesn\'t exist');   
         }
 
+        if($this->serviceAlreadyExists($service_name))
+        {
+            $this->badRequest('This service already exists');
+        }
+
         try
         {
             $service = new Service(
@@ -74,6 +79,26 @@ class CreateServiceController extends Auth
         {
             $this->badRequest('You already have this service name registered');
         }
+    }
+
+    public function deleteService($service_name)
+    {
+        try
+        {
+            $service = $this->serviceDao->findByName($_SESSION['user_email'], $service_name);    
+
+            if(empty($service))
+                throw new Exception("This service doesn't exist");
+                
+        }
+        catch(Exception $exception)
+        {
+            error(404, 'Not Found', $exception->getMessage());
+        }
+
+        $this->serviceDao->delete($service);
+        $this->serviceDao->deleteAllSharedUsers($service);
+        header("Location: $GLOBALS[path]/user/services");
     }
 
     private function badRequest($description)
@@ -102,5 +127,11 @@ class CreateServiceController extends Auth
         ];
 
         return in_array($service_type, $services);
+    }
+
+    private function serviceAlreadyExists($service_name)
+    {
+        $service = $this->serviceDao->findByService($service_name);
+        return $service != null;
     }
 }

@@ -39,6 +39,15 @@ class ServiceDAO implements ServiceDataAccessObject
         ]);
     }
 
+    public function deleteAllSharedUsers($service)
+    {
+        $connection = DataBase::getConnection();
+        $statement = $connection->prepare("DELETE FROM auth_list WHERE reference=:reference");
+        $statement->execute([
+            "reference" => $service->getReference()
+        ]);
+    }
+
     public function findAllShared($service)
     {
         $connection = DataBase::getConnection();
@@ -77,6 +86,33 @@ class ServiceDAO implements ServiceDataAccessObject
         $statement = $connection->prepare("SELECT * FROM services WHERE user_email=:user and BINARY service_name=:service_name");
         $statement->execute([
             "user"         => $user,
+            "service_name" => $service_name
+        ]);
+
+        $result_set = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        if(!$result_set)
+            return null;
+        
+        $service = new Service(
+            $result_set[0]['type'],
+            $result_set[0]['privacy'],
+            $result_set[0]['service_name'],
+            $result_set[0]['description'],
+            $result_set[0]['code'],
+            $result_set[0]['user_email']
+        );
+
+        $service->setId($result_set[0]['id']);
+        $service->setReference($result_set[0]['reference']);
+        return $service;
+    }
+
+    public function findByService($service_name)
+    {
+        $connection = DataBase::getConnection();
+        $statement = $connection->prepare("SELECT * FROM services WHERE BINARY service_name=:service_name");
+        $statement->execute([
             "service_name" => $service_name
         ]);
 
