@@ -13,6 +13,7 @@ require_once 'controllers/RegisterController.php';
 require_once 'controllers/ServicesController.php';
 require_once 'controllers/DocumentationController.php';
 require_once 'controllers/AccountController.php';
+require_once 'controllers/ApiController.php';
 
 // Route dispatcher
 if(isset($_SERVER['PATH_INFO']))
@@ -160,6 +161,12 @@ switch ($url)
     case '/user/account':
         $controller = new AccountController;
         $controller->show();
+    break;
+
+    case '/api/execute':
+        $controller = new ApiController;
+        $input = file_get_contents('php://input');
+        $controller->__invoke($input);
     break;
 
     default:

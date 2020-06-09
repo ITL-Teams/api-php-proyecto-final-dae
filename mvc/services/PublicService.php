@@ -10,6 +10,6 @@ class PublicService extends ServiceDecorator
     }
 
     public function executeService($input) {
-        $this->getService()->executeService($input);
+        return $this->getService()->executeService($input);
     }
 }
