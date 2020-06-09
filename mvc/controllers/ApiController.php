@@ -21,17 +21,21 @@ class ApiController
     {
         $headers = getallheaders();
 
+        if($_SERVER['REQUEST_METHOD'] != 'POST')
+            $this->http_error(405);
+
         if(empty($input))
             $this->http_error(400);
 
         if(!$this->isJson($input))
             $this->http_error(400);
 
-        if(!$this->hasAuthKey($headers))
-            $this->http_error(403);
-
         $request = json_decode($input);
         $service = $this->getService($request);
+
+        if( $service->getPrivacy() != 'public' &&
+           !$this->hasAuthKey($headers))
+            $this->http_error(403);
 
         $executableService = $this->serviceFactory->__invoke($service);
         $executableService = $this->privacyFactory->__invoke($service, $executableService);
@@ -45,6 +49,7 @@ class ApiController
             $this->http_error(400);
         }
 
+        header('Content-type: application/json; charset=UTF-8');
         echo $response;
     }
 
