@@ -17,6 +17,11 @@ abstract class ServiceDecorator implements Services\Service
     	$this->access_key = $access_key;
     }
 
+    public function getAccessKey()
+    {
+        return $this->access_key;
+    }
+
     protected function getService()
     {
         return $this->service;

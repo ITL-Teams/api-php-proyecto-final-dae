@@ -6,7 +6,7 @@ require_once 'services/SharedService.php';
 
 class PrivacyFactory
 {
-	public function __invoke($service, $executableService)
+	public function __invoke($service, $executableService, $access_key)
 	{
 		$service_privacy = $service->getPrivacy();
 
@@ -14,9 +14,17 @@ class PrivacyFactory
 			return new PublicService($executableService);
 
 		if($service_privacy == 'private')
-			return new PrivateService($executableService);
+		{
+			$private_service = new PrivateService($executableService);
+			$private_service->setAccessKey($access_key);
+			return $private_service;
+		}
 
 		if($service_privacy == 'shared')
-			return new SharedService($executableService);
+		{
+			$shared_service = new SharedService($executableService);
+			$shared_service->setAccessKey($access_key);
+			return $shared_service;
+		}
 	}
 }

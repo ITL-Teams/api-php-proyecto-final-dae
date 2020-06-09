@@ -37,8 +37,11 @@ class ApiController
            !$this->hasAuthKey($headers))
             $this->http_error(403);
 
+        if(!isset($headers['Authorization']))
+            $headers['Authorization'] = '';
+
         $executableService = $this->serviceFactory->__invoke($service);
-        $executableService = $this->privacyFactory->__invoke($service, $executableService);
+        $executableService = $this->privacyFactory->__invoke($service, $executableService, $headers['Authorization']);
 
         try
         {
@@ -46,7 +49,8 @@ class ApiController
         }
         catch(UnexecutableService $exception)
         {
-            $this->http_error(400);
+            $code = $exception->getCode() != null ? $exception->getCode() : 400;
+            $this->http_error($code);
         }
 
         header('Content-type: application/json; charset=UTF-8');

@@ -25,7 +25,7 @@ abstract class AbstractService implements Services\Service
         $this->description  = $description;
     }
 
-    protected function getId() { 
+    public function getId() { 
         return $this->id;
     }
 
