@@ -99,6 +99,22 @@ switch ($url)
         $controller->show(form('service'));
     break;
 
+    case '/user/services/create/shared/create':
+        $controller = new SharedServiceController;
+        $controller->add(
+            form('service'),
+            form('email')
+        );
+    break;
+
+    case '/user/services/create/shared/delete':
+        $controller = new SharedServiceController;
+        $controller->delete(
+            form('service'),
+            form('email')
+        );
+    break;
+
     case '/user/services/edit':
         $controller = new EditServiceController;
         $controller->show(form('service'));

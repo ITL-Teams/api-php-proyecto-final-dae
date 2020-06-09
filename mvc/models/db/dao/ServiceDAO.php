@@ -2,6 +2,7 @@
 
 require_once 'service_dao.php';
 require_once 'models/Service.php';
+require_once 'models/SharedUser.php';
 require_once 'services/exceptions/existing_service.php';
 
 class ServiceDAO implements ServiceDataAccessObject
@@ -29,12 +30,44 @@ class ServiceDAO implements ServiceDataAccessObject
     {
         $connection = DataBase::getConnection();
 
-        $sql  = "INSERT INTO auth_list(referece, token) VALUES (:referece, :token)";
+        $sql  = "INSERT INTO auth_list(reference, token) VALUES (:referece, :token)";
 
         $statement = $connection->prepare($sql);
         $statement->execute([
             "referece" => $sharedUser->getReference(),
             "token"    => $sharedUser->getToken()
+        ]);
+    }
+
+    public function findAllShared($service)
+    {
+        $connection = DataBase::getConnection();
+        $statement = $connection->prepare("SELECT * FROM auth_list WHERE reference=:reference");
+        $statement->execute([
+            "reference" => $service->getReference()
+        ]);
+
+        $result_set = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        $shared = [];
+        foreach ($result_set as $user) {
+            $new_user = new SharedUser(
+                $user['reference'],
+                $user['token'],
+            );
+            array_push($shared, $new_user);
+        }
+
+        return $shared;
+    }
+
+    public function deleteSharedUser($sharedUser)
+    {
+        $connection = DataBase::getConnection();
+        $statement = $connection->prepare("DELETE FROM auth_list WHERE reference=:reference and token=:token");
+        $statement->execute([
+            "reference" => $sharedUser->getReference(),
+            "token"     => $sharedUser->getToken()
         ]);
     }
 
@@ -58,10 +91,11 @@ class ServiceDAO implements ServiceDataAccessObject
             $result_set[0]['service_name'],
             $result_set[0]['description'],
             $result_set[0]['code'],
-            $result_set[0]['reference'],
             $result_set[0]['user_email']
         );
+
         $service->setId($result_set[0]['id']);
+        $service->setReference($result_set[0]['reference']);
         return $service;
     }
 
@@ -83,10 +117,10 @@ class ServiceDAO implements ServiceDataAccessObject
                 $service['service_name'],
                 $service['description'],
                 $service['code'],
-                $service['reference'],
                 $service['user_email']
             );
             $new_service->setId($service['id']);
+            $new_service->setReference($result_set[0]['reference']);
             array_push($services, $new_service);
         }
 
@@ -109,10 +143,10 @@ class ServiceDAO implements ServiceDataAccessObject
                 $service['service_name'],
                 $service['description'],
                 $service['code'],
-                $service['reference'],
                 $service['user_email']
             );
             $new_service->setId($service['id']);
+            $new_service->setReference($result_set[0]['reference']);
             array_push($services, $new_service);
         }
 
@@ -136,10 +170,10 @@ class ServiceDAO implements ServiceDataAccessObject
             $result_set[0]['service_name'],
             $result_set[0]['description'],
             $result_set[0]['code'],
-            $result_set[0]['reference'],
             $result_set[0]['user_email']
         );
         $service->setId($result_set[0]['id']);
+        $service->setReference($result_set[0]['reference']);
         return $service;
     }
 

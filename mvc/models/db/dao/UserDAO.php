@@ -66,11 +66,33 @@ class UserDAO implements DataAccessObject
     }
 
 
- public function findEmail($email)
+    public function findEmail($email)
     {
         $connection = DataBase::getConnection();
         $statement = $connection->prepare("SELECT * FROM users WHERE email=:email");
         $statement->execute(["email" => $email]);
+
+        $result_set = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        if(!$result_set)
+            return null;
+        
+        $users = new User(
+            $result_set[0]['email'],
+            $result_set[0]['password'],
+            $result_set[0]['name'],
+            $result_set[0]['token']
+        );
+        $users->setId($result_set[0]['id']);
+        $users->setUserType($result_set[0]['user_type']);
+        return $users;
+    }
+
+    public function findByToken($token)
+    {
+        $connection = DataBase::getConnection();
+        $statement = $connection->prepare("SELECT * FROM users WHERE token=:token");
+        $statement->execute(["token" => $token]);
 
         $result_set = $statement->fetchAll(PDO::FETCH_ASSOC);
 

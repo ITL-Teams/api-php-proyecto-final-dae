@@ -52,7 +52,7 @@
 										Shared
 								</option>
 							</select>
-							<a href="">who can access my service?</a>
+							<a href="<?= "$GLOBALS[path]/user/services/create/shared?service=$service_name" ?>">who has access to my service?</a>
 						</div>
 					</div>
 					<hr>
