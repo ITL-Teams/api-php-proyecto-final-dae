@@ -10,7 +10,6 @@
 	<style type="text/css">
 		.content{
 			padding-left: 5%;
-			padding-right: 5%;
 			text-align: left;
 			padding-top: 20px;
 			border: 4px solid;
@@ -34,68 +33,95 @@
 				<img src="<?= "$GLOBALS[assets]/img/regex.png" ?>" style="border-radius: 15px" width="100px"> Regex
 			</p>	
 			<p class="paragraph">
-			Regex (Expresión Regular) es una secuencia de caracteres que conforma un patrón 
-			de búsqueda. Se utilizan principalmente para la búsqueda de patrones de cadenas 
-			de caracteres u operaciones de sustituciones.
+			Regex (Regular Expression) is a sequence of characters that make up a pattern
+			search. They are mainly used to search for string patterns
+			character or substitution operations.
 			</p>
 			<p  class="paragraph">
-			Su utilidad más obvia es la de describir un conjunto de cadenas para una determinada función, resultando de utilidad en editores de texto y otras aplicaciones informáticas para buscar y manipular textos.
+			Its most obvious utility is the description of a set of strings for a specific function, being useful in text editors and other computer applications to search and manipulate texts.
 			</p>
 			<p  class="paragraph">
-			Numerosos editores de texto y otras herramientas utilizan expresiones regulares para buscar y reemplazar patrones en un texto. Por ejemplo, las herramientas proporcionadas por las distribuciones de Unix (incluyendo el editor sed y el filtro grep) popularizaron el concepto de expresión regular entre usuarios no programadores, aunque ya era familiar entre los programadores.
+			Numerous text editors and other tools use regular expressions to find and replace patterns in text. For example, tools provided by Unix distributions (including the sed editor and grep filter) popularized the concept of regular expression among non-programmer users, although it was already familiar to programmers.
 			</p>
 			<p  class="paragraph">
-			Inicialmente, este reconocimiento de cadenas se programaba para cada aplicación sin mecanismo alguno inherente al lenguaje de programación pero, con el tiempo, se ha ido incorporado el uso de expresiones regulares para facilitar programar la detección de ciertas cadenas. Por ejemplo, Perl tiene un potente motor de expresiones regulares directamente incluido en su sintaxis. Otros lenguajes lo han incorporado como funciones específicas sin incorporarlo a su sintaxis. 
+			Initially, this recognition of strings was programmed for each application without any mechanism inherent to the programming language, but over time the use of regular expressions has been incorporated to facilitate the detection of certain strings. For example, Perl has a powerful regular expression engine directly embedded in its syntax. Other languages ​​have incorporated it as specific functions without incorporating it into their syntax.
 			</p>
 			<hr>
 			<div class="estructura">
-				<p class="title" style="text-align: left"> Estructura para crear servicio</p>
-				Para crear servicio:<br>
-				regex-type = {boolean, match, match-all, replace}<br>
-				default: boolean<br>
-				regex = {/regex expresion/}<br>
-				default: /.+/<br><br>
-				<b>Ejemplo:</b><br>
-				<p style="font-style: italic">		
+				<p class="title" style="text-align: left"> How to create regex a service?</p>
+				<h3>The Owner:</h3>
+				<strong>optional_param:</strong> regex-type<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong>values:</strong> boolean, match, match-all, replace<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong>default:</strong> boolean<br><br>
+
+
+				<strong>optional_param:</strong> regex<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong>value:</strong> regex expression<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong>default:</strong> /.+/<br><br>
+
+				<b>Example:</b><br>
+				<p >		
 				{<br>
-				    "regex-type": "replace"<br>
-				    "regex": "/world/"<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+				    "regex-type": "replace",<br>
+				    &nbsp;&nbsp;&nbsp;&nbsp;
+				    "regex": "/bad_word/"<br>
 				}<br>
 				</p>
 				<hr>
-				El cliente que consume el servicio obligatorio: <br>
-				input = "input string"<br>
+				<h3>The Client:</h3>
+				<strong>required_param:</strong> input<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong>value:</strong> A string<br><br>
+			
+				<p><strong>Note: </strong>In case of use a <b>regex-type = replace</b> you must provide a replacement string</p>
 
-				obligatorio si el servicio es replace:<br>
-				replacement = "replacement string"<br><br>
+				<strong>required_param (just in replace):</strong> replacement<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong>value:</strong> A string<br><br>
 
-				<b>Siguiendo el ejemplo anterior:</b><br>
-				<p style="font-style: italic">
+				<b>Following the example above:</b><br>
+				<p >
 				{<br>
-					"input": "Hello world",<br>
-					"replacement": "Ricardo"<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					"service": "regexTest",<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					"input": "Hey you bad_word, you are a pice of bad_word.",<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					"replacement": "---"<br>
 				}<br><br>
 				</p>
-				<b>El resultado que regresa la API es:</b><br>
-				<p style="font-style: italic">
+				<b>The API response is similar to this:</b><br>
+				<p>
 				{<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;
 					"success": true,<br>
-					"output": "Hello Ricardo"<br>
-				}<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					"output": "Hey you ---, you are a pice of ---."<br>
+				}<br><hr><br>
+				
+				<b>Response Explanation</b><br>
 				</p>
-				<b>success</b> devuelve true si hay match en la expresión regular
-				y false en caso de que no<br>
+				<b>success:</b> returns true if there is a match in the regular expression. <br>
 
-				<b>Casos para el service-type:</b><br>
-				Tipo match: cuando regresa una respuesta solo regresa el success. <br>
-				Tipo replace: si no hay cohincidencia entonces el output traera el string
-				original del input.<br>
-				Otro tipo: en el otput pondra la salida.<br>
+				<b>output:</b><br>
+				That depends on regex-type, these are the responses you can get.
+				<ul>
+					<li><b>When boolean: </b>No output parameter</li>
+					<li><b>When match: </b>Returns an array that contains one match</li>
+					<li><b>When match-all: </b>Returns an array containing other arrays with multiple matches</li>
+					<li><b>When replace: </b>Returns the input with the replacement value that matches with regex</li>
+				</ul>
+				
 				<hr>
 				<p class="title" style="text-align: left">
-					Codigo
+					Test Code
 				</p>
-				<div class="algo" style="background-color: white">
+				<div class="algo" style="background-color: white; width: 95%; border-radius: 20px">
 				<pre>
 					<code style="">
 	class RegexTest extends UnitTest

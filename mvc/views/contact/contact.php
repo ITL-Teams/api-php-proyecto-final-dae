@@ -22,7 +22,7 @@
 
 			<div class="form-group">
 				<label for="comment">Comment</label>
-				<textarea class="form-control" name="comment" rows="5" style="resize: none" placeholder="Your comment :)"></textarea>
+				<textarea class="form-control" name="comment" rows="5" style="resize: none" placeholder="Please, make a detailed description"></textarea>
 			</div>
   			
   			<button type="submit" class="btn btn-success">Send</button>

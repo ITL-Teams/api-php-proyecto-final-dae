@@ -41,7 +41,7 @@ class LoginController extends Auth
 
         if (empty($user))
         {
-            error (500, "usario no encontrado");
+            error (401, "Unauthorized", "Not valid credentials");
         }
         else if ($password==$user->getPassword())
         {

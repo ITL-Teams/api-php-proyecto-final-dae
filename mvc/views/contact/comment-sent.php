@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Contacto</title>
+	<title>NetWS Contact</title>
 
 	<?php require_once 'views/layouts/header.php'; ?>
 </head>
@@ -12,8 +12,8 @@
 	<?php require_once 'views/layouts/navbar.php'; ?>
 	
 	<div class="container mt-4 text-center">
-		<h1 class="mb-4">Comentario Enviado</h1>
-		<h2><small>Agradecemos tú apoyo :)</small></h2>
+		<h1 class="mb-4">Your comment has been registered.</h1>
+		<h2><small>We are working on it!</small></h2>
 	</div>
 </body>
 </html>

@@ -27,10 +27,10 @@
 					</div>
 					<div class="col-md-9">
 						<div class="form-row">
-							<p class="paragraph">
-								Regex (Expresión Regular) es una secuencia de caracteres que conforma un patrón 
-								de búsqueda. Se utilizan principalmente para la búsqueda de patrones de cadenas 
-								de caracteres u operaciones de sustituciones.
+							<p class="paragraph">								
+								Regex (Regular Expression) is a sequence of characters that make up a pattern
+								search. They are mainly used to search for string patterns
+								character or substitution operations.
 							</p>
 						</div>
 						<div class="form-row">
@@ -57,8 +57,8 @@
 						<div class="col-md-12">
 							<p class="paragraph">
 								<br><br>
-								Hazte premium y obten acceso a todos nuestros servicios.<br>
-								Crea, modifica y comparte tus servicios.
+								Become Premium today and get access to all our services!<br><br>
+								Create, modify and share your services.
 							</p>
 						</div>
 						<div class="col-md-12">
